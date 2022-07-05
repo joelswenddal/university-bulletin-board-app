@@ -1,0 +1,49 @@
+﻿@using BulletinApp.Shared
+@model HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to QuadBoard</h1>
+    <p>A virtual bulletin board for XYZ university.</p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Promos</h2>
+        <div id="promo-table">
+            <table>
+                <tbody>
+                <tr>
+                    <td>ID</td>
+                    <td>Post Date</td>
+                    <td>Contact Name</td>
+                    <td>Description</td>   
+                </tr>
+                
+                @foreach(Promo p in @Model.Promos)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Home"
+                           asp-action="PromoDetail"
+                           asp-route-id="@p.PromoId">
+                           @(p.UserId is null ? "NA" : p.UserId.Value.ToString())
+                           </a>
+                        </td>
+                        <td>@p.PostDate.ToShortDateString()</td>
+                        <td>@(p.ContactName is null ? "NA" : p.ContactName)</td>
+                        <td>@(p.Description is null ? "NA" : p.Description)</td>
+                        
+                    </tr>
+                    
+                }
+
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>

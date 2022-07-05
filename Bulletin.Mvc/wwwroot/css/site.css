@@ -1,0 +1,29 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+#promo-columns
+{
+    column-count: 1;
+}
+
+#promo-table
+{
+    column-count: 1;
+    text-align: center;
+}
