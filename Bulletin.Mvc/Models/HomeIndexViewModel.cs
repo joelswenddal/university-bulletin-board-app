@@ -5,8 +5,8 @@ namespace Bulletin.Mvc.Models
 {
     public record HomeIndexViewModel
     (
-        int UserCount,
-        IList<User> Users,
+        //int UserCount,
+        //IList<User> Users,
         IList<Promo> Promos
     );
 }

@@ -2,6 +2,27 @@ html {
   font-size: 14px;
 }
 
+* {
+    font-family: 'Noto Mono','Roboto Mono', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+}
+
+h1 {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+}
+
+h2 {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+}
+
+h3, h4 {
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 500;
+}
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -22,8 +43,10 @@ body {
     column-count: 1;
 }
 
-#promo-table
-{
-    column-count: 1;
-    text-align: center;
+#center-board-area {
+    background-color: #eff2f4;
+}
+
+#list-header-row {
+    background-color: #ddd9d7;
 }

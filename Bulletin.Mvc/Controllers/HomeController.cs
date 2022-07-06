@@ -26,8 +26,8 @@ namespace Bulletin.Mvc.Controllers
         {
             HomeIndexViewModel model = new
                (
-                UserCount: db.Users.ToList().Count,
-                Users: db.Users.ToList(),
+                //UserCount: db.Users.ToList().Count,
+                //Users: db.Users.ToList(),
                 Promos: db.Promos.ToList()
                 );
             

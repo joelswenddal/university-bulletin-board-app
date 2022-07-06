@@ -24,6 +24,9 @@ namespace BulletinApp.Shared
         public string? PromoType { get; set; }
         [Column(TypeName = "date")]
         public DateTime PostDate { get; set; }
+
+        [StringLength(100)]
+        public string? Headline { get; set; }
         [StringLength(255)]
         public string? Description { get; set; }
         [StringLength(200)]
