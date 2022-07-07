@@ -22,8 +22,8 @@ namespace Bulletin.Mvc.Controllers
             //specified in Program.cs
             db = injectedContext;
         }
-        
-        
+
+
 
         // GET: PromoController
         public ActionResult Index()
@@ -56,74 +56,151 @@ namespace Bulletin.Mvc.Controllers
             return View();
         }
 
-        // POST: PromoController/Create
+        // POST: Promo/Create
         [HttpPost]
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
             [Bind("ContactName, PromoType, Headline, Description, ContactInfo")] Promo model)
-        
+
         {
             try
             {
-               if (ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     model.PostDate = DateTime.Now;
                     db.Promos.Add(model);
                     await db.SaveChangesAsync();
                     return RedirectToAction("PromoDetail", new { id = model.PromoId });
                 }
-                
+
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 _logger.LogWarning($"The write to the database was unsuccessful. Exception: {ex.Message}");
                 ModelState.TryAddModelError("", "Unable to save changes in the database." + "Please try again.");
-                
+
             }
             return View(model);
         }
 
-        // GET: PromoController/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Promo/Edit/5
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var model = await db.Promos.FindAsync(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            return View(model);
         }
 
-        // POST: PromoController/Edit/5
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         //[ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> EditPromo(int? id)
         {
-            try
+            if (!id.HasValue)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound($"404: PromoID {id} not found.");  //404
             }
-            catch
+
+            
+            var model = await db.Promos.FirstOrDefaultAsync(p => p.PromoId == id);
+
+            /*
+            if (model == null)
             {
-                return View();
+                return NotFound($"404: PromoID {id} not found.");
             }
+            */
+
+            //TryUpdateModelAsync updates fields in retrieved entity based
+            // on user input in the posted form data
+            if (await TryUpdateModelAsync<Promo>(
+                model,
+                "",
+                p => p.ContactName,
+                p => p.PromoType,
+                p => p.Headline,
+                p => p.Description,
+                p => p.ContactInfo))
+            {
+                try
+                {
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("PromoDetail", new { id = model.PromoId });
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning($"The write to the database was unsuccessful. Exception: {ex.Message}");
+                    ModelState.TryAddModelError("", "Unable to save changes in the database." + "Please try again.");
+                }
+            }
+            return View(model);
         }
 
         // GET: PromoController/Delete/5
-        public ActionResult Delete(int id)
+        // GET: Promo/Delete/5
+        public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
-            return View();
-        }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        // POST: PromoController/Delete/5
-        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+            var model = await db.Promos
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.PromoId == id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewData["ErrorMessage"] =
+                    "Delete failed. Try again, and if the problem persists " +
+                    "see your system administrator.";
+            }
+
+            return View(model);
+        }
+        
+        
+        // POST: Promo/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            try
+            var model = await db.Promos.FindAsync(id);
+            if (model == null)
             {
                 return RedirectToAction(nameof(Index));
             }
-            catch
+
+            try
             {
-                return View();
+                db.Promos.Remove(model);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index", "Board");
+            }
+            catch (DbUpdateException ex )
+            {
+                //Log the error
+                return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }
         }
+
+        private bool PromoExists(int id)
+        {
+            return db.Promos.Any(e => e.PromoId == id);
+        }
+
+      
     }
 }

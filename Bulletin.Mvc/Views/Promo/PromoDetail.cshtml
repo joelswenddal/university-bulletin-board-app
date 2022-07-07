@@ -22,6 +22,15 @@
     <dd>@(Model.Description is null ? "NA" : Model.Description)</dd>
   </dl>
 </div>
+
+<div>
+    <a class="btn btn-md m-2" id="home-page-buttons" 
+        asp-area="" asp-controller="Promo" asp-action="Edit" asp-route-id="@Model.PromoId">Edit this Promo</a>
+</div>
+<div>
+    <a class="btn btn-md m-2" id="home-page-buttons" 
+        asp-area="" asp-controller="Promo" asp-action="Delete" asp-route-id="@Model.PromoId">Delete this Promo</a>
+</div>
 <div>
     <a class="btn btn-md m-2" id="return-buttons" 
         asp-area="" asp-controller="Board" asp-action="Index">Return to Current Board</a>

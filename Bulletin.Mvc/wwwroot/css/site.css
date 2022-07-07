@@ -105,7 +105,7 @@ hr.style1 {
     width: 80%;
 }
 
-dt {
+dt, #edit-labels {
     font-size: 20px;
     font-family: 'Roboto Slab', serif;
     font-weight: 500;

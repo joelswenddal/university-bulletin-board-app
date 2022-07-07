@@ -18,28 +18,41 @@
                 <div class="row" id="list-header-row">
                     <div class="col-md-1"><b>ID</b></div>
                     <div class="col-md-1"><b>User ID</b></div>
-                    <div class="col-md-2"><b>Posted</b></div>
+                    <div class="col-md-1"><b>Posted</b></div>
                     <div class="col-md-3"><b>Headline</b></div>
                     <div class="col-md-1"><b>User Name</b></div>
                     <div class="col-md-4"><b>Description</b></div>
+                    <div class="col-md-1"><b>View Details</b></div>
                 </div>
                 @foreach(Promo p in @Model.Promos)
                 {
+                    if (p.Description is null)
+                    {
+                        p.Description = "NA";
+                    }
+                    if (p.Description.Length > 33)
+                    {
+                        p.Description = p.Description.Substring(0, 33) + "...";
+                    }
                     <div class="row text-left" id="list-item">
-                        <div class="col-md-1 overflow-hidden"><a asp-controller="Promo"
+                        <div class="col-md-1 mt-1 overflow-hidden"><a asp-controller="Promo"
                            asp-action="PromoDetail"
                            asp-route-id="@p.PromoId">
                            @p.PromoId.ToString()
                            </a>
                         </div>
-                        <div class="col-md-1 overflow-hidden">@(p.UserId is null ? "NA" : p.UserId.Value.ToString())</div>
-                        <div class="col-md-2 overflow-hidden">@p.PostDate.ToShortDateString()</div>
-                        <div class="col-md-3 overflow-hidden">@(p.Headline is null ? "NA" : p.Headline)</div>
-                        <div class="col-md-1 overflow-hidden">@(p.ContactName is null ? "NA" : p.ContactName)</div>
-                        <div class="col-md-4 overflow-hidden">@(p.Description is null ? "NA" : p.Description)</div>
-                    </div>
+                        <div class="col-md-1 mt-1 overflow-hidden">@(p.UserId is null ? "NA" : p.UserId.Value.ToString())</div>
+                        <div class="col-md-1 mt-1 overflow-hidden">@p.PostDate.ToShortDateString()</div>
+                        <div class="col-md-3 mt-1 overflow-hidden">@(p.Headline is null ? "NA" : p.Headline)</div>
+                        <div class="col-md-1 mt-1 overflow-hidden">@(p.ContactName is null ? "NA" : p.ContactName)</div>
+                        <div class="col-md-4 mt-1 overflow-hidden">@(p.Description)</div>
+                        <div class="col-md-1">
+                            <a class="btn btn-xs mt-2 mb-1" id="home-page-buttons" 
+                                asp-area="" asp-controller="Promo" asp-action="PromoDetail" asp-route-id="@p.PromoId">View</a>
+                        </div>
+                     </div>
                 }
-                </div>
-            </div>
+             </div>
+        </div>
     </div>
 </div>

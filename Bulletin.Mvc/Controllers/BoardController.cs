@@ -22,6 +22,7 @@ namespace Bulletin.Mvc.Controllers
             db = injectedContext;
         }
 
+        // Board/Index
         //improve performance by caching with browser
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()

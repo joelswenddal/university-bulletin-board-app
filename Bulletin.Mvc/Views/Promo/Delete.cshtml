@@ -1,0 +1,30 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model BulletinApp.Shared.Promo
+
+@{
+    ViewData["Title"] = "Promo - Delete";
+}
+
+<h1>Delete a Promo</h1>
+<p class="text-danger">@ViewData["ErrorMessage"]</p>
+<h3>Are you sure you want to delete this Promo?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PromoId)
+        </dt>
+        <dd class = "col-sm-2">
+            @Html.DisplayFor(model => model.ContactName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Headline)
+        </dt>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="PromoId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-controller="Board" asp-action="Index">Return to Current Board</a>
+    </form>
+</div>
