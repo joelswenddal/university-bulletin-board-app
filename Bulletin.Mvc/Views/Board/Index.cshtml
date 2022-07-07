@@ -1,0 +1,45 @@
+﻿@using BulletinApp.Shared
+@model BoardIndexViewModel
+
+@{
+    ViewData["Title"] = "Board Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Your QuadBoard</h1>
+    <p><i>Currently-listed Promo posts</i></p>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 rounded" id="center-board-area">
+            <h2>Promos</h2>
+            <div class="container-fluid">
+                <div class="row" id="list-header-row">
+                    <div class="col-md-1"><b>ID</b></div>
+                    <div class="col-md-1"><b>User ID</b></div>
+                    <div class="col-md-2"><b>Posted</b></div>
+                    <div class="col-md-3"><b>Headline</b></div>
+                    <div class="col-md-1"><b>User Name</b></div>
+                    <div class="col-md-4"><b>Description</b></div>
+                </div>
+                @foreach(Promo p in @Model.Promos)
+                {
+                    <div class="row text-left" id="list-item">
+                        <div class="col-md-1 overflow-hidden"><a asp-controller="Promo"
+                           asp-action="PromoDetail"
+                           asp-route-id="@p.PromoId">
+                           @p.PromoId.ToString()
+                           </a>
+                        </div>
+                        <div class="col-md-1 overflow-hidden">@(p.UserId is null ? "NA" : p.UserId.Value.ToString())</div>
+                        <div class="col-md-2 overflow-hidden">@p.PostDate.ToShortDateString()</div>
+                        <div class="col-md-3 overflow-hidden">@(p.Headline is null ? "NA" : p.Headline)</div>
+                        <div class="col-md-1 overflow-hidden">@(p.ContactName is null ? "NA" : p.ContactName)</div>
+                        <div class="col-md-4 overflow-hidden">@(p.Description is null ? "NA" : p.Description)</div>
+                    </div>
+                }
+                </div>
+            </div>
+    </div>
+</div>

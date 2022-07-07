@@ -1,0 +1,28 @@
+﻿@model BulletinApp.Shared.Promo
+@{
+  ViewData["Title"] = "Promo Detail - ID" + Model.PromoId.ToString();
+}
+<h2>Promo #@Model.PromoId:  <span id="promo-headline-title">@(Model.Headline is null ? "NA" : Model.Headline) </span></h2>
+<hr />
+<div>
+  <dl class="dl-horizontal">
+    <dt>Promo Id</dt>
+    <dd>@Model.PromoId.ToString()</dd>
+    <dt>Headline</dt>
+    <dd>@(Model.Headline is null ? "NA" : Model.Headline)</dd>
+    <dt>Post Date</dt>
+    <dd>@Model.PostDate.ToShortDateString()</dd>
+    <dt>User Id</dt>
+    <dd>@(Model.UserId is null ? "NA" : Model.UserId.Value.ToString())</dd>
+    <dt>Contact Name</dt>
+    <dd>@(Model.ContactName is null ? "NA" : Model.ContactName)</dd>
+    <dt>Contact Info</dt>
+    <dd>@(Model.ContactInfo is null ? "NA" : Model.ContactInfo)</dd>
+    <dt>Description</dt>
+    <dd>@(Model.Description is null ? "NA" : Model.Description)</dd>
+  </dl>
+</div>
+<div>
+    <a class="btn btn-md m-2" id="return-buttons" 
+        asp-area="" asp-controller="Board" asp-action="Index">Return to Current Board</a>
+</div>

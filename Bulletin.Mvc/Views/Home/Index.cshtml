@@ -11,34 +11,29 @@
 </div>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12" id="center-board-area">
-            <h2>Promos</h2>
-            <div class="container-fluid">
-                <div class="row" id="list-header-row">
-                    <div class="col-md-1"><h4>ID</h4></div>
-                    <div class="col-md-2"><h4>Posted</h4></div>
-                    <div class="col-md-3"><h4>Headline</h4></div>
-                    <div class="col-md-2"><h4>User Name</h4></div>
-                    <div class="col-md-2"><h4>Description</h4></div>
-                </div>
-                @foreach(Promo p in @Model.Promos)
-                {
-                    <div class="row">
-                        <div class="col-md-1"><a asp-controller="Home"
-                           asp-action="PromoDetail"
-                           asp-route-id="@p.PromoId">
-                           @(p.UserId is null ? "NA" : p.UserId.Value.ToString())
-                           </a>
-                        </div>
-                        <div class="col-md-2">@p.PostDate.ToShortDateString()</div>
-                        <div class="col-md-3">@(p.Headline is null ? "NA" : p.Headline)</div>
-                        <div class="col-md-2">@(p.ContactName is null ? "NA" : p.ContactName)</div>
-                        <div class="col-md-4">@(p.Description is null ? "NA" : p.Description)</div>
-                    </div>
-                }
-        
-                </div>
+     <div class="container rounded justify-content-center" id="home-center-area">
+         
+         
+         <div class="row justify-content-center mb-2">
+            <div class="col-lg-3">Check the current Promos</div>
+            <div class="col-lg-3">
+                <a class="btn btn-lg w-100" id="home-page-buttons" 
+                asp-area="" asp-controller="Board" asp-action="Index">View Board</a>
             </div>
+        </div>
+        <div class="row justify-content-center">
+            <hr class="style1" />
+        </div>
+        <div class="row justify-content-center mb-2">
+            <div class="col-lg-3">Create a new Promo</div>
+            <div class="col-lg-3">
+                <a class="btn btn-lg w-100" id="home-page-buttons" 
+                asp-area="" asp-controller="Promo" asp-action="Create">Create Promo</a>
+            </div>
+        </div>
     </div>
-</div>  
+</div>
+
+
+
+

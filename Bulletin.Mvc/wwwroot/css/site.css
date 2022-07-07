@@ -23,6 +23,7 @@ h3, h4 {
     font-weight: 500;
 }
 
+
 @media (min-width: 768px) {
   html {
     font-size: 16px;
@@ -45,8 +46,73 @@ body {
 
 #center-board-area {
     background-color: #eff2f4;
+    padding: 20px 10px 20px 10px;
+}
+
+#home-center-area {
+    padding: 20px 10px 10px 10px;
+    background-color: #eff2f4;
+    width: 60%;
 }
 
 #list-header-row {
-    background-color: #ddd9d7;
+    font-family: 'Roboto Mono', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    top: 0px;
+    margin: 0px;
+    padding: 0px 2px 2px 3px;
+    border-width: 2px;
+    border-bottom-width: 2px;
+    border-bottom-color: #f0a07a;
+    border-bottom-style: solid;
+    width: 100%;
+}
+
+#list-item {
+    margin: 0px;
+    padding: 0px 2px 2px 3px;
+    border-width: 2px;
+    border-bottom-width: 2px;
+    border-bottom-color: White;
+    border-bottom-style: solid;
+    width: 100%;
+}
+
+#home-page-buttons {
+    background-color: #f0a07a;  
+    color: white;
+    outline: none;
+    border: none;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+}
+
+#return-buttons {
+    background-color: #607D8B;
+    color: white;
+    outline: none;
+    border: none;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+}
+
+
+hr.style1 {
+    border-top: 2px solid;
+    border-top-color: white;
+    width: 80%;
+}
+
+dt {
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+}
+
+#promo-headline-title {
+    color: #d88f6c;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
 }
