@@ -112,15 +112,15 @@ namespace Bulletin.Mvc.Controllers
             
             var model = await db.Promos.FirstOrDefaultAsync(p => p.PromoId == id);
 
-            /*
+            
             if (model == null)
             {
                 return NotFound($"404: PromoID {id} not found.");
             }
-            */
 
             //TryUpdateModelAsync updates fields in retrieved entity based
             // on user input in the posted form data
+#pragma warning disable CS8603 // Possible null reference return.
             if (await TryUpdateModelAsync<Promo>(
                 model,
                 "",
@@ -141,6 +141,7 @@ namespace Bulletin.Mvc.Controllers
                     ModelState.TryAddModelError("", "Unable to save changes in the database." + "Please try again.");
                 }
             }
+#pragma warning restore CS8603 // Possible null reference return.
             return View(model);
         }
 
@@ -192,6 +193,8 @@ namespace Bulletin.Mvc.Controllers
             catch (DbUpdateException ex )
             {
                 //Log the error
+                _logger.LogWarning($"The Remove operation in the database was unsuccessful. Exception: {ex.Message}");
+                ModelState.TryAddModelError("", "Unable to save changes (delete) in the database." + "Please try again.");
                 return RedirectToAction(nameof(Delete), new { id = id, saveChangesError = true });
             }
         }

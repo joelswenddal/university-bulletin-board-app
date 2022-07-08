@@ -8,6 +8,7 @@
 <h1>Delete a Promo</h1>
 <p class="text-danger">@ViewData["ErrorMessage"]</p>
 <h3>Are you sure you want to delete this Promo?</h3>
+<p><i>Warning: This action cannot be reversed!</i></p>
 <div>
     <hr />
     <dl class="row">
@@ -15,11 +16,14 @@
             @Html.DisplayNameFor(model => model.PromoId)
         </dt>
         <dd class = "col-sm-2">
-            @Html.DisplayFor(model => model.ContactName)
+            @Html.DisplayFor(model => model.PromoId)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Headline)
         </dt>
+        <dd class = "col-sm-2">
+            @Html.DisplayFor(model => model.Headline)
+        </dd>
     </dl>
     
     <form asp-action="Delete">
