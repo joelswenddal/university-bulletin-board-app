@@ -3,7 +3,7 @@ html {
 }
 
 * {
-    font-family: 'Noto Mono','Roboto Mono', sans-serif;
+    font-family: 'Roboto Mono', 'Noto Sans', sans-serif;
     font-style: normal;
     font-weight: 400;
 }
@@ -21,6 +21,13 @@ h2 {
 h3, h4 {
     font-family: 'Roboto Mono', sans-serif;
     font-weight: 500;
+}
+
+#subscript {
+    font-family: 'Roboto Mono', 'Noto Sans', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 13px;
 }
 
 
@@ -89,6 +96,15 @@ body {
     font-weight: 500;
 }
 
+#delete-resource-buttons {
+    background-color: #ca5923;
+    color: white;
+    outline: none;
+    border: none;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+}
+
 #return-buttons {
     background-color: #607D8B;
     color: white;
@@ -101,7 +117,7 @@ body {
 
 hr.style1 {
     border-top: 2px solid;
-    border-top-color: white;
+    border-top-color: #607D8B;
     width: 80%;
 }
 
