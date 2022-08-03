@@ -1,0 +1,87 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using BulletinApp.Shared
+@model Root
+@{
+    ViewData["Title"] = "Textbook Search Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid text-center">
+        
+        <div class="row justify-content-center align-items-center">
+            <h1 class="display-4" id="home-page-title">Amazon Textbook Search</h1>
+        </div>
+        <div class="row justify-content-center align-items-center">
+            <hr class="style1"/>
+        </div>
+</div>
+<div class="container-fluid mb-3">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-4">
+            <form asp-action="Text" form-method="GET">
+                <div class="form-group input-group">
+                    <label class="control-label input-group"></label>
+                    <input class="form-control input-group rounded" name="searchTerm" />
+                    <span class="input-group-button"><input type="submit" value="Search Amazon" class="btn btn-primary m-2" id="home-page-buttons" /></span>
+                    <span class="text-danger"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid text-left">
+        <div class="row justify-content-left align-items-left">
+            <h2 class="display-6">Results for: @ViewData["searchTerm"]</h2>
+        </div>
+</div>
+<div class="container-fluid">
+    <div class="row text-left" id="list-header-row">
+                    <div class="col-md-2"><b>AmazonID</b></div>
+                    <div class="col-md-6"><b>Title</b></div>
+                    <div class="col-md-1"><b>Price</b></div>
+                    <div class="col-md-1"><b>Rating</b></div>
+                    <div class="col-md-2"><b>Amazon Link</b></div>
+    </div>
+                
+    @foreach (var book in Model.search_results)
+    {
+        if (book is not null)
+        {
+        
+            if (book.title is not null && book.title.Length > 60)
+            {
+                book.title = book.title.Substring(0, 60) + "...";
+            }
+            <div class="row text-left" id="list-item">
+                <div class="col-md-2 mt-1 overflow-hidden">@book.asin</div>
+                <div class="col-md-6 mt-1 overflow-hidden"><a href=@book.link>@book.title</a></div>
+                @if (book.Price is not null && book.Price.Raw is not null)
+                {
+                    <div class="col-md-1 mt-1 overflow-hidden">@book.Price.Raw</div>
+                }
+                else
+                {
+                    <div class="col-md-1 mt-1">NA</div>
+                }
+                <div class="col-md-1 mt-1 overflow-hidden">@(book.rating is null ? "NA" : book.rating)</div>
+                <div class="col-md-2 mt-1 overflow-hidden"><a href=@book.link>View on Amazon</a></div>
+            </div>
+        }
+    }
+ </div>
+ <hr />
+ <div class="container-fluid mt-2">
+    <div class="row justify-content-center">
+        <div class="col">
+            <a class="btn btn-md" id="return-buttons" 
+                asp-area="" asp-controller="Board" asp-action="Index">Return to Current Board</a>
+        </div>
+    </div>
+</div>
+ 
+ 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

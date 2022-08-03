@@ -1,4 +1,5 @@
 using BulletinApp.Shared; // AddBulletinContext extension method
+using System.Net.Http.Headers; // MediaTypeWithQualityHeaderValue
 
 namespace Bulletin.Mvc
 {
@@ -7,6 +8,15 @@ namespace Bulletin.Mvc
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddHttpClient(name: "Amazon.Search.Microservice",
+                configureClient: options =>
+                {
+                    options.BaseAddress = new Uri("https://project-357202.wl.r.appspot.com/");
+                    options.DefaultRequestHeaders.Accept.Add(
+                        new MediaTypeWithQualityHeaderValue(
+                            "application/json", 1.0));
+                });
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

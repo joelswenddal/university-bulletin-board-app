@@ -2,10 +2,10 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-  font-size: 16px;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+    font-size: 18px;
 }
 
 a {
@@ -25,7 +25,9 @@ a {
 }
 
 .bg-nav-grey {
-    background-color: #607D8B;
+    /*background-color: #607D8B;*/
+    /*background-color: #73a4ba;*/
+    background-color: #13294b;
 }
 
 .border-top {

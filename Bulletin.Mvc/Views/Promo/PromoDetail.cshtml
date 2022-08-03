@@ -2,7 +2,7 @@
 @{
   ViewData["Title"] = "Promo Detail - ID" + Model.PromoId.ToString();
 }
-<h2>Promo #@Model.PromoId:  <span id="promo-headline-title">@(Model.Headline is null ? "NA" : Model.Headline) </span></h2>
+<h2 id="home-page-title">Promo #@Model.PromoId:  <span id="promo-headline-title">@(Model.Headline is null ? "NA" : Model.Headline) </span></h2>
 <hr />
 <div>
   <dl class="dl-horizontal">

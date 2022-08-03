@@ -1,5 +1,5 @@
 html {
-  font-size: 14px;
+  font-size: 12px;
 }
 
 * {
@@ -27,13 +27,13 @@ h3, h4 {
     font-family: 'Roboto Mono', 'Noto Sans', sans-serif;
     font-style: italic;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 16px;
 }
 
 
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
 
@@ -62,6 +62,12 @@ body {
     width: 60%;
 }
 
+#home-page-title {
+    font-family: 'Graduate', 'Roboto Slab', serif;
+    font-weight: 400;
+    color: #0455a4;
+}
+
 #list-header-row {
     font-family: 'Roboto Mono', sans-serif;
     font-style: normal;
@@ -85,10 +91,13 @@ body {
     border-bottom-color: White;
     border-bottom-style: solid;
     width: 100%;
+    font-size:13px;
 }
 
 #home-page-buttons {
-    background-color: #f0a07a;  
+    /*background-color: #f0a07a;*/
+    background-color: #ef6a4c;
+    /*background-color: #ee5e5e;*/
     color: white;
     outline: none;
     border: none;
@@ -97,7 +106,8 @@ body {
 }
 
 #delete-resource-buttons {
-    background-color: #ca5923;
+    /*background-color: #ca5923;*/
+    background-color: #d50032;
     color: white;
     outline: none;
     border: none;
@@ -106,7 +116,9 @@ body {
 }
 
 #return-buttons {
-    background-color: #607D8B;
+    /*background-color: #607D8B;*/
+    /*background-color: #73a4ba;*/
+    background-color: #0455a4;
     color: white;
     outline: none;
     border: none;
@@ -128,7 +140,16 @@ dt, #edit-labels {
 }
 
 #promo-headline-title {
-    color: #d88f6c;
+    color: #ef6a4c;
     font-family: 'Roboto Slab', serif;
     font-weight: 500;
+}
+
+#nav-brand {
+    font-family: 'Graduate','Roboto Slab', serif;
+    font-size: 20px;
+}
+
+#search-container {
+    background-color: #d0d8dd;
 }

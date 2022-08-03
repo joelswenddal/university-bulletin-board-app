@@ -31,7 +31,46 @@ namespace Bulletin.Mvc.Controllers
                (
                 Promos: await db.Promos.ToListAsync()
                 );
+            
+            return View(model);
+        }
 
+        // Board/Search?searchString=
+        //improve performance by caching with browser
+        [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
+        public async Task<IActionResult> Search(string searchString, string criteria = "keyword")
+        {
+            ViewData["searchString"] = searchString;
+            //create LINQ query
+            var promos = from p in db.Promos
+                         where p != null
+                         select p;
+            
+            if (criteria != "keyword" && criteria != "author")
+            {
+                criteria = "keyword";
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+
+                if (criteria == "keyword")
+                {
+                    promos = promos.Where(p => (!String.IsNullOrEmpty(p.Headline)
+                    && p.Headline.Contains(searchString))
+                    || (!String.IsNullOrEmpty(p.Description)
+                    && p.Description.Contains(searchString)));
+                }
+                else if (criteria == "author")
+                {
+                    promos = promos.Where(p => (!String.IsNullOrEmpty(p.ContactName)
+                    && p.ContactName.Contains(searchString)));
+                }
+            }
+            BoardIndexViewModel model = new
+               (
+                Promos: await promos.ToListAsync()
+                );
 
             return View(model);
         }
