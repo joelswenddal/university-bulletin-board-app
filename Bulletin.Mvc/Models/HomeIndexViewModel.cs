@@ -1,12 +1,10 @@
-﻿using BulletinApp.Shared;  // Users, Promos
+﻿using BulletinApp.Shared;  // Promos
 
 
 namespace Bulletin.Mvc.Models
 {
     public record HomeIndexViewModel
     (
-        //int UserCount,
-        //IList<User> Users,
-        IList<Promo> Promos
+        IList<BulletinApp.Shared.Category> Categories
     );
 }

@@ -43,6 +43,8 @@ namespace BulletinApp.Shared
                         "PromosCategory",
                         l => l.HasOne<Category>().WithMany().HasForeignKey("CategoryId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PC_Categories"),
                         r => r.HasOne<Promo>().WithMany().HasForeignKey("PromoId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PC_Promos"),
+                        //pc => pc.HasOne<Category>().WithMany().HasForeignKey("CategoryId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PC_Categories"),
+                        //pc => pc.HasOne<Promo>().WithMany().HasForeignKey("PromoId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK_PC_Promos"),
                         j =>
                         {
                             j.HasKey("PromoId", "CategoryId");

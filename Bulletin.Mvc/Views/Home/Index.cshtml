@@ -55,8 +55,66 @@
             <div class="col-lg-3">Watch video to learn how to use QuadBoard</div>
             <div class="col-lg-3">
                 <a class="btn btn-lg w-100" id="home-page-buttons" 
-                asp-area="" asp-controller="Home" asp-action="Index">Learn Quadboard</a>
+                asp-area="" asp-controller="Home" asp-action="Index">Learn QuadBoard</a>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="container rounded justify-content-center" id="home-categories-area">
+        <h2 class="subheadings">Latest Promos</h2>
+        
+        <div class="row justify-content-left">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <hr class="style1" />
+                </div>
+            </div>
+            @{
+                int col = 1;
+                foreach (BulletinApp.Shared.Category c in @Model.Categories)
+                {
+                    <div class="col-4">
+                        <div class="container mb-3 mt-2 pt-2 overflow-hidden" id="home-category-card">
+                                <div class="row g-2 mb-2 justify-content-center" id="category-labels">@(
+                                c.CategoryName is null ? "NA" : c.CategoryName
+                                )</div>
+                                @{
+                                    int cnt = 0;
+                                    foreach (Promo p in c.Promos)
+                                    {
+                                        if (cnt > 5) break;
+
+                                        if (p.Headline is null)
+                                        {
+                                            p.Headline = "NA";
+                                        }
+                                        if (p.Headline.Length > 26)
+                                        {
+                                            p.Headline = p.Headline.Substring(0, 25) + "...";
+                                        }
+
+                                        <div class="row mb-2 g-2 justify-content-left" id="promo-descr-preview">
+                                                <a class="btn btn-xs mt-0 mb-0" id="promo-descr-btn" asp-controller="Promo" asp-action="PromoDetail" asp-route-id="@p.PromoId">
+                                                =>&nbsp@(p.Headline)
+                                                </a>
+                                        </div>
+                                        cnt++;
+                                    }
+                                 }
+                        </div>
+                    </div>
+                    if (col % 3 == 0)
+                    {
+                        <div class="row justify-content-center">
+                                <hr class="style1" />
+                        </div>
+                    }
+                    col++;
+                }
+            }
+            
         </div>
     </div>
 </div>

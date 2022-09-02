@@ -14,30 +14,60 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             
             <div class="form-group">
-                <label asp-for="ContactName" class="control-label"></label>
+                <label id="edit-labels" asp-for="ContactName" class="control-label"></label>
                 <input asp-for="ContactName" class="form-control" />
                 <span asp-validation-for="ContactName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PromoType" class="control-label"></label>
+                <label id="edit-labels" asp-for="PromoType" class="control-label"></label>
                 <input asp-for="PromoType" class="form-control" />
                 <span asp-validation-for="PromoType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Headline" class="control-label"></label>
+                <label id="edit-labels" asp-for="Headline" class="control-label"></label>
                 <input asp-for="Headline" class="form-control" />
                 <span asp-validation-for="Headline" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
+                <label id="edit-labels" asp-for="Description" class="control-label"></label>
                 <textarea asp-for="Description" class="form-control" id="exampleFormControlTextarea1" rows="4"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ContactInfo" class="control-label"></label>
+                <label id="edit-labels" asp-for="ContactInfo" class="control-label"></label>
                 <input asp-for="ContactInfo" class="form-control" />
                 <span asp-validation-for="ContactInfo" class="text-danger"></span>
             </div>
+            
+            <div class="form-group">
+                <label id="edit-labels" asp-for="Categories" class="control-label"></label>
+                <div class="col-md-offset-2 col-md-12" id="category-area">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                List<Bulletin.Mvc.Models.DataViewModels.PromoCategoriesData> categories = ViewBag.Categories;
+
+                                foreach (var category in categories)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedCategories"
+                                               value="@category.CategoryId"
+                                               @(Html.Raw(category.Associated ? "checked=\"checked\"" : "")) />
+                                               @: @category.CategoryName
+                                    @:</td>
+                                }
+                                @:</tr>
+                            }
+                    </table>
+                </div>
+            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary m-2" id="home-page-buttons" />
             </div>

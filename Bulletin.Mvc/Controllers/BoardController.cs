@@ -12,18 +12,18 @@ namespace Bulletin.Mvc.Controllers
         private readonly ILogger<BoardController> _logger;
         private readonly BulletinContext db;
 
+        /*******************************************************************************************/
         public BoardController(ILogger<BoardController> logger,
             BulletinContext injectedContext)
         {
             _logger = logger;
-            //.NET uses constructor parameter injection to pass an instance
-            // of the BulletinContext db context using the the connection string
-            //specified in Program.cs
             db = injectedContext;
         }
 
-        // Board/Index
-        //improve performance by caching with browser
+        /*******************************************************************************************/
+        /// <summary>
+        /// Endpoint for GET: Board/Index
+        /// </summary>
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()
         {
@@ -35,12 +35,15 @@ namespace Bulletin.Mvc.Controllers
             return View(model);
         }
 
-        // Board/Search?searchString=
-        //improve performance by caching with browser
+        /*******************************************************************************************/
+        /// <summary>
+        /// Endpoint for GET: Board/Search?searchString=[]?criteria=[]
+        /// </summary>
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Search(string searchString, string criteria = "keyword")
         {
             ViewData["searchString"] = searchString;
+            
             //create LINQ query
             var promos = from p in db.Promos
                          where p != null
@@ -53,7 +56,6 @@ namespace Bulletin.Mvc.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-
                 if (criteria == "keyword")
                 {
                     promos = promos.Where(p => (!String.IsNullOrEmpty(p.Headline)
@@ -67,6 +69,7 @@ namespace Bulletin.Mvc.Controllers
                     && p.ContactName.Contains(searchString)));
                 }
             }
+            
             BoardIndexViewModel model = new
                (
                 Promos: await promos.ToListAsync()
@@ -74,6 +77,5 @@ namespace Bulletin.Mvc.Controllers
 
             return View(model);
         }
-
     }
 }

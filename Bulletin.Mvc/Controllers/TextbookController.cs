@@ -11,31 +11,31 @@ namespace Bulletin.Mvc.Controllers
     public class TextbookController : Controller
     {
         private readonly ILogger<TextbookController> _logger;
-        //private readonly BulletinContext db;
         private readonly IHttpClientFactory clientFactory;
 
+        /*******************************************************************************************/
         public TextbookController(ILogger<TextbookController> logger,
             BulletinContext injectedContext,
             IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
-            //.NET uses constructor parameter injection to pass an instance
-            // of the BulletinContext db context using the the connection string
-            //specified in Program.cs
-            
-            //db = injectedContext;
             clientFactory = httpClientFactory;
         }
 
-        // Textbook/Index
-        //improve performance by caching with browser
+        /*******************************************************************************************/
+        /// <summary>
+        /// Endpoint for GET Textbook/Index
+        /// </summary>
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         public IActionResult Index()
         {
             return View();
         }
-        
-        // Textbook/Text?searchTerm  GET
+
+        /*******************************************************************************************/
+        /// <summary>
+        /// Endpoint for GET Textbook/Text?searchTerm=[]
+        /// </summary>
         [ResponseCache(Duration = 20, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Text(string? searchTerm)
         {
@@ -66,18 +66,12 @@ namespace Bulletin.Mvc.Controllers
             {
                 string json = await response.Content.ReadAsStringAsync();
                 Root? textbooks = JsonConvert.DeserializeObject<Root>(json);
-                //SearchResult? textbooks = JsonConvert.DeserializeObject<SearchResult>(json);
                 return View(textbooks);
             }
             else
             {
                 return View("Error");
             }
-
-            //IEnumerable<Textbook>? model = await response.Content
-            //  .ReadFromJsonAsync<IEnumerable<Textbook>>();
-
-            //string? respString = await response.Content.ReadAsStringAsync().Result;
         }
     }
 }

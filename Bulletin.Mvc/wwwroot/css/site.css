@@ -30,6 +30,12 @@ h3, h4 {
     font-size: 16px;
 }
 
+.subheadings {
+    font-family: 'Graduate', 'Roboto Slab', serif;
+    font-weight: 400;
+    color: #0455a4;
+}
+
 
 @media (min-width: 768px) {
   html {
@@ -60,6 +66,20 @@ body {
     padding: 20px 10px 10px 10px;
     background-color: #eff2f4;
     width: 60%;
+    margin-top: 2em;
+}
+
+#home-categories-area {
+    padding: 20px 10px 10px 10px;
+    width: 90%;
+    margin-top: 2em;
+    background-color: #d0d8dd;
+    border-radius: 5px;
+}
+
+#home-category-card {
+    background-color: #eff2f4;
+    border-radius: 5px;
 }
 
 #home-page-title {
@@ -130,7 +150,7 @@ body {
 hr.style1 {
     border-top: 2px solid;
     border-top-color: #607D8B;
-    width: 80%;
+    width: 90%;
 }
 
 dt, #edit-labels {
@@ -139,10 +159,35 @@ dt, #edit-labels {
     font-weight: 500;
 }
 
+#category-labels {
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 500;
+    color: #0455a4;
+}
+
 #promo-headline-title {
     color: #ef6a4c;
     font-family: 'Roboto Slab', serif;
     font-weight: 500;
+}
+
+#promo-descr-preview {
+    margin: 0px;
+    padding: 0px 2px 2px 3px;
+    font-size: 11px;
+    text-align: left;
+}
+
+#promo-descr-btn {
+    padding: 0px;
+    text-align: left;
+}
+
+#promo-descr-btn:hover {
+    background-color: white;
+    color: #ef6a4c;
+    border-radius: 3px;
 }
 
 #nav-brand {
@@ -152,4 +197,13 @@ dt, #edit-labels {
 
 #search-container {
     background-color: #d0d8dd;
+}
+
+#category-area {
+    background-color: #d0d8dd;
+    margin-right: 3px;
+    margin-top:4px;
+    margin-bottom:3px;
+    padding:3px;
+    border-radius: 5px;
 }

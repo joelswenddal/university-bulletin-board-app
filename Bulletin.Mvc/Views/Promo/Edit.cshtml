@@ -40,6 +40,34 @@
                 <span asp-validation-for="ContactInfo" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label id="edit-labels" asp-for="Categories" class="control-label"></label>
+                <div class="col-md-offset-2 col-md-12" id="category-area">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                List<Bulletin.Mvc.Models.DataViewModels.PromoCategoriesData> categories = ViewBag.Categories;
+
+                                foreach (var category in categories)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedCategories"
+                                               value="@category.CategoryId"
+                                               @(Html.Raw(category.Associated ? "checked=\"checked\"" : "")) />
+                                        @: @category.CategoryName
+                                    @:</td>
+                                }
+                                @:</tr>
+                              }
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary m-2" id="home-page-buttons" />
             </div>
         </form>

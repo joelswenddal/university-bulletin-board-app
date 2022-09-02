@@ -9,6 +9,7 @@ namespace Bulletin.Mvc
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            // Add microservice client to services
             builder.Services.AddHttpClient(name: "Amazon.Search.Microservice",
                 configureClient: options =>
                 {
@@ -17,13 +18,12 @@ namespace Bulletin.Mvc
                         new MediaTypeWithQualityHeaderValue(
                             "application/json", 1.0));
                 });
-
-            // Add services to the container.
+            
             builder.Services.AddControllersWithViews();
 
-            // Load the connection string and then register the Bulletin database context (using the extension method)
+            // Load the connection string -> register Bulletin db context
             string sqlServerConnection = builder.Configuration
-                .GetConnectionString("BulletinConnection");  //appsettings.json
+                .GetConnectionString("BulletinConnection");
 
             builder.Services.AddBulletinContext(sqlServerConnection);
 
@@ -33,11 +33,12 @@ namespace Bulletin.Mvc
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                // The default HSTS value is 30 days
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
 
             app.UseRouting();
