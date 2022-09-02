@@ -82,6 +82,7 @@ namespace Bulletin.Mvc.Controllers
         /// Endpoint for POST: Promo/Create
         /// </summary>
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
             [Bind("ContactName, PromoType, Headline, Description, ContactInfo")] Promo model, string[] selectedCategories)
         {
@@ -89,7 +90,6 @@ namespace Bulletin.Mvc.Controllers
             {
                 if (selectedCategories != null)
                 {
-                    //model.Categories = new HashSet<BulletinApp.Shared.Category>();
 
                     foreach (var category in selectedCategories)
                     {
@@ -157,6 +157,7 @@ namespace Bulletin.Mvc.Controllers
         /// Endpoint for POST: Promo/Edit/id
         /// </summary>
         [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditPromo(int? id, string[] selectedCategories)
         {
             if (!id.HasValue)
@@ -274,7 +275,7 @@ namespace Bulletin.Mvc.Controllers
             }
         }
 
-        /*******************************************************************************************/
+        /****************************HELPER Methods**********************************************************/
         /// <summary>
         /// Checks if a Promo record in the db has a matching id,
         /// returns true if it does, false if it does not.

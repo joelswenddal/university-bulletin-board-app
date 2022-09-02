@@ -30,6 +30,7 @@ namespace BulletinApp.Shared
         [StringLength(255)]
         public string? Description { get; set; }
         [StringLength(200)]
+        [EmailAddress]
         public string? ContactInfo { get; set; }
         public byte[]? Photo { get; set; }
         [StringLength(255)]
