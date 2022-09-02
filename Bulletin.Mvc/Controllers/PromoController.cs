@@ -135,8 +135,6 @@ namespace Bulletin.Mvc.Controllers
                 return NotFound();
             }
 
-            //var model = await db.Promos.FindAsync(id);
-
             Promo? model = await db.Promos
                 .Include(p => p.Categories)
                 .SingleOrDefaultAsync(p => p.PromoId == id);
