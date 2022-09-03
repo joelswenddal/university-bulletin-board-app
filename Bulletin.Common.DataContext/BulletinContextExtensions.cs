@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore; // UseSqlServer
 using Microsoft.Extensions.DependencyInjection; // IServiceCollection
 
+
 namespace BulletinApp.Shared;
 
 public static class BulletinContextExtensions
@@ -14,7 +15,8 @@ public static class BulletinContextExtensions
     public static IServiceCollection AddBulletinContext(
       this IServiceCollection services, string connectionString =
         "Data Source=(localdb\\MSSQLLocalDB;Initial Catalog=Bulletin;"
-        + "Integrated Security=true;MultipleActiveResultsets=true;")
+        + "Integrated Security=true;MultipleActiveResultsets=true;"
+        )
     {
         services.AddDbContext<BulletinContext>(options =>
           options.UseSqlServer(connectionString)

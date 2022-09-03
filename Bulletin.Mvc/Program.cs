@@ -1,5 +1,7 @@
 using BulletinApp.Shared; // AddBulletinContext extension method
+using System.Configuration;
 using System.Net.Http.Headers; // MediaTypeWithQualityHeaderValue
+using ConfigurationManager = System.Configuration.ConfigurationManager;
 
 namespace Bulletin.Mvc
 {
@@ -23,12 +25,13 @@ namespace Bulletin.Mvc
 
             // Load the connection string -> register Bulletin db context
             string sqlServerConnection = builder.Configuration
-                .GetConnectionString("BulletinConnection");
+                .GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
+                //.GetConnectionString("BulletinConnection");
 
             builder.Services.AddBulletinContext(sqlServerConnection);
 
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
