@@ -1,7 +1,7 @@
 using BulletinApp.Shared; // AddBulletinContext extension method
 using System.Configuration;
 using System.Net.Http.Headers; // MediaTypeWithQualityHeaderValue
-using ConfigurationManager = System.Configuration.ConfigurationManager;
+
 
 namespace Bulletin.Mvc
 {
@@ -12,6 +12,7 @@ namespace Bulletin.Mvc
             var builder = WebApplication.CreateBuilder(args);
 
             // Add microservice client to services
+            /* Code for inclusion of Amazon Textbook Search Microservice
             builder.Services.AddHttpClient(name: "Amazon.Search.Microservice",
                 configureClient: options =>
                 {
@@ -20,7 +21,7 @@ namespace Bulletin.Mvc
                         new MediaTypeWithQualityHeaderValue(
                             "application/json", 1.0));
                 });
-            
+            */
             builder.Services.AddControllersWithViews();
 
             // Load the connection string -> register Bulletin db context

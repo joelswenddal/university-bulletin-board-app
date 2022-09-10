@@ -42,7 +42,9 @@ namespace Bulletin.Mvc.Controllers
         {
             if (!id.HasValue)
             {
-                return BadRequest("Must include a PromoID in route, e.g., /Promo/PromoDetail/5");
+                _logger.LogError("Bad Request to Promo/PromoDetail/id. Id paramter must be included in query");
+                
+                return BadRequest("400: Must include a valid PromoID in route, e.g., /Promo/PromoDetail/5");
             }
 
             Promo? model = await db.Promos
@@ -51,7 +53,8 @@ namespace Bulletin.Mvc.Controllers
 
             if (model == null)
             {
-                return NotFound($"404: PromoID {id} not found.");
+                _logger.LogError("Request to Promo/PromoDetail/id invalid. PromoId {id} not found in database", id);
+                return NotFound($"404: PromoID {id} not found. Please enter a valid id");
             }
 
             if (model.Categories.Count == 0)
@@ -110,6 +113,8 @@ namespace Bulletin.Mvc.Controllers
                     db.Promos.Add(model);
                     
                     await db.SaveChangesAsync();
+
+                    _logger.LogInformation("New Promo record created. PromoId: {}", model.PromoId);
                     return RedirectToAction("PromoDetail", new { id = model.PromoId });
                 }
 
@@ -132,7 +137,8 @@ namespace Bulletin.Mvc.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                _logger.LogError("Invalid request to Promo/Edit/id. Id parameter must be included");
+                return NotFound("400: Must include a valid PromoID in route, e.g., /Promo/Edit/5");
             }
 
             Promo? model = await db.Promos
@@ -141,6 +147,8 @@ namespace Bulletin.Mvc.Controllers
 
             if (model == null)
             {
+
+                _logger.LogError("Bad Request to Promo/Edit/id. PromoId {id} not found in database", id);
                 return NotFound($"404: PromoID {id} not found.");
             }
 
@@ -167,8 +175,6 @@ namespace Bulletin.Mvc.Controllers
             Promo? model = await db.Promos
                 .Include(p => p.Categories)
                 .FirstOrDefaultAsync(p => p.PromoId == id);
-
-            //var model = await db.Promos.FirstOrDefaultAsync(p => p.PromoId == id);
 
             if (model == null)
             {
@@ -211,7 +217,8 @@ namespace Bulletin.Mvc.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                _logger.LogError("Invalid request to Promo/Delete/id. Id parameter must be included");
+                return NotFound("400: Must include a valid PromoID in route, e.g., /Promo/Delete/5");
             }
 
             var model = await db.Promos

@@ -125,6 +125,12 @@ body {
     font-weight: 500;
 }
 
+    #home-page-buttons:hover {
+        background-color: white;
+        color: #0455a4; /*#ef6a4c;*/
+        border-radius: 3px;
+    }
+
 #delete-resource-buttons {
     /*background-color: #ca5923;*/
     background-color: #d50032;
@@ -185,8 +191,8 @@ dt, #edit-labels {
 }
 
 #promo-descr-btn:hover {
-    background-color: white;
-    color: #ef6a4c;
+    background-color: #0455a4;
+    color: white; /*#ef6a4c;*/
     border-radius: 3px;
 }
 

@@ -27,6 +27,10 @@ namespace Bulletin.Mvc.Controllers
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("Board/Index page visited at {DT}",
+            DateTime.UtcNow.ToLongTimeString());
+
+
             BoardIndexViewModel model = new
                (
                 Promos: await db.Promos.ToListAsync()
@@ -43,7 +47,10 @@ namespace Bulletin.Mvc.Controllers
         public async Task<IActionResult> Search(string searchString, string criteria = "keyword")
         {
             ViewData["searchString"] = searchString;
-            
+
+            _logger.LogInformation("Board/Search action executed at {DT}",
+            DateTime.UtcNow.ToLongTimeString());
+
             //create LINQ query
             var promos = from p in db.Promos
                          where p != null

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 
-namespace Bulletin.Mvc.Controllers
+namespace Bulletin.Mvc.UnusedControllers
 {
     public class TextbookController : Controller
     {
@@ -29,7 +29,10 @@ namespace Bulletin.Mvc.Controllers
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]
         public IActionResult Index()
         {
-            return View();
+            _logger.LogError("Bad Request to Textbook/Index. This route is not functioning");
+            return NotFound($"404: This is not a route for the Bulletin site");
+
+            //return View();
         }
 
         /*******************************************************************************************/
@@ -39,6 +42,12 @@ namespace Bulletin.Mvc.Controllers
         [ResponseCache(Duration = 20, Location = ResponseCacheLocation.Any)]
         public async Task<IActionResult> Text(string? searchTerm)
         {
+            //_logger.LogError("Bad Request to Textbook/Text. This route is not functioning");
+            //return NotFound($"404: This is not a route for the Bulletin site");
+
+            return View("Error");
+
+            /*
             string uri;
 
             if (string.IsNullOrEmpty(searchTerm))
@@ -72,6 +81,7 @@ namespace Bulletin.Mvc.Controllers
             {
                 return View("Error");
             }
+            */
         }
     }
 }

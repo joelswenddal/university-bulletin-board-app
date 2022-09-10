@@ -27,6 +27,9 @@ namespace Bulletin.Mvc.Controllers
         [ResponseCache(Duration = 10, Location = ResponseCacheLocation.Any)]  
         public IActionResult Index()
         {
+            _logger.LogInformation("Home page visited at {DT}",
+            DateTime.UtcNow.ToLongTimeString());
+
             HomeIndexViewModel model = new
                (
                     Categories: db.Categories.Include(c => c.Promos).ToList()
